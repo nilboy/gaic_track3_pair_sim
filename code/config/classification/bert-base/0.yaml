@@ -1,0 +1,58 @@
+wandb_version: 1
+
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.10.15
+    framework: huggingface
+    huggingface_version: 4.3.0.rc1
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    python_version: 3.6.10
+    t:
+      1:
+      - 1
+      - 3
+      - 5
+      - 11
+      2:
+      - 1
+      - 3
+      - 5
+      - 11
+      3:
+      - 1
+      - 2
+      4: 3.6.10
+      5: 0.10.15
+      6: 4.3.0.rc1
+additional_at_epsilon:
+  desc: null
+  value: 0
+additional_at_type:
+  desc: null
+  value: base
+additional_batch_size:
+  desc: null
+  value: 64
+additional_pretrain_model_path:
+  desc: null
+  value: ../user_data/mlm/bert-base/outputs
+layer_0-12:
+  desc: null
+  value: 4.0e-05
+params_classifier:
+  desc: null
+  value: 4.0e-05
+params_embeddings:
+  desc: null
+  value: 4.0e-05
+params_pooler:
+  desc: null
+  value: 4.0e-05
+weight_decay:
+  desc: null
+  value: 0.0001
+manual_seed:
+  desc: null
+  value: 124525601

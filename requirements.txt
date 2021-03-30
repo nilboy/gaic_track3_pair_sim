@@ -1,0 +1,2 @@
+transformers=4.3.0.rc1
+simpletransformers==0.51.15

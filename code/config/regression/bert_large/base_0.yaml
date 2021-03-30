@@ -1,0 +1,75 @@
+# 通用参数
+general_config:
+  project: "sim_oopp"
+  wandb_key: "102e91c347362a1c36652cb6f711a63a47ecb516" # config your own key.
+  output_dir: "outputs_sweep"
+  train_data: "../user_data/data/train_data/kfold/0/train_enhanced_regress_dev.jsonl"
+  eval_data : "../user_data/data/train_data/kfold/0/dev.jsonl"
+  test_data : "../user_data/data/train_data/kfold/0/dev.jsonl"
+
+# 转换参数需要的配置
+additional_config:
+  max_batch_size: 64
+
+# 模型训练参数
+model_args:
+  eval_batch_size: 24
+  evaluate_during_training: False
+  evaluate_during_training_silent: False
+  evaluate_during_training_steps: 0
+  learning_rate: 2e-5
+  max_seq_length: 64
+  use_multiprocessing: True
+  no_cache: False
+  no_save: True
+  num_train_epochs: 15
+  overwrite_output_dir: True
+  reprocess_input_data: True
+  train_batch_size: 32
+  gradient_accumulation_steps: 1
+  train_custom_parameters_only: True
+  scheduler: "cosine_schedule_with_warmup"
+  regression: True
+  use_bimodel: False
+  temperature: 1.0
+  use_early_stopping: False
+  early_stopping_delta: 0.0
+  early_stopping_metric: "auroc"
+  early_stopping_metric_minimize: False
+  early_stopping_consider_epochs: True
+  early_stopping_patience: 4
+
+# 超参搜索参数
+sweep_config:
+  name: "first-stage-classify"
+  method: "bayes"
+  metric:
+    name: "auroc"
+    goal: "maximize"
+  parameters:
+    manual_seed:
+      values: [124525601]
+    weight_decay:
+      min: 0.0
+      max: 1e-3
+    # params
+    params_pooler:
+      min: 1e-5
+      max: 1e-4
+    params_classifier:
+      min: 1e-5
+      max: 1e-4
+    # layer
+    layer_18-24:
+      min: 5e-6
+      max: 1e-4
+
+    # additional
+    additional_batch_size:
+      values: [16, 32, 64, 128, 256]
+    additional_at_type:
+      values: ['base']
+    additional_at_epsilon:
+      values: [0.0]
+    additional_pretrain_model_path:
+      values: ["../user_data/regression-base-model"]
