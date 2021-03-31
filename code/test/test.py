@@ -56,6 +56,6 @@ variance = np.mean(np.var(results, axis=1))
 print(f'方差: {variance}')
 results_merge = [np.mean(item) for item in results]
 
-with open('../user_data/result.tsv', 'w') as fout:
+with open('../prediction_result/result.tsv', 'w') as fout:
     for value in results_merge:
         fout.write(f'{value}' + '\n')
