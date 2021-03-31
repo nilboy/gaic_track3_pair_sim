@@ -15,7 +15,8 @@ def predict_label(model_name,
                   model_id,
                   data_base_dir,
                   model_base_dir,
-                  output_dir):
+                  output_dir,
+                  task):
     logger.info(f'model_name: {model_name}; kfold_id: {kfold_id}; model_id {model_id}')
     os.makedirs(output_dir, exist_ok=True)
     model = SimTextModel('bert',
@@ -34,23 +35,30 @@ def predict_label(model_name,
                     'mode': mode
                 })
     results = model.predict(records)
-    scores = softmax(results[1], 1)
-    for i in range(len(scores)):
-        record_meta_infos[i]['score'] = scores[i][1]
+    if task == 'classification':
+        scores = softmax(results[1], 1)
+        for i in range(len(scores)):
+            record_meta_infos[i]['score'] = scores[i][1]
+    else:
+        scores = results[0]
+        for i in range(len(scores)):
+            record_meta_infos[i]['score'] = scores[i]
+
     with open(os.path.join(output_dir, f'{model_name}-{kfold_id}-{model_id}.jsonl'), 'w') as fout:
         for item in record_meta_infos:
             fout.write(json.dumps(item, ensure_ascii=False) + '\n')
 
 def construct_soft_label(model_names=None,
+                         task="classification",
                          kfold_num=5,
                          model_num=1):
     if model_names is None:
-        model_names = os.listdir('../user_data/classification')
+        model_names = os.listdir(f'../user_data/{task}')
     else:
         model_names = model_names.split(',')
     data_base_dir = '../user_data/data/train_data'
-    model_base_dir = '../user_data/classification'
-    output_dir = '../user_data/soft_labels/outputs'
+    model_base_dir = f'../user_data/{task}'
+    output_dir = f'../user_data/soft_labels/{task}'
     for model_name in model_names:
         for kfold_id in range(0, kfold_num):
             for model_id in range(0, model_num):
@@ -59,7 +67,8 @@ def construct_soft_label(model_names=None,
                               model_id,
                               data_base_dir,
                               model_base_dir,
-                              output_dir)
+                              output_dir,
+                              task=task)
 
 if __name__ == '__main__':
     fire.Fire(construct_soft_label)
