@@ -12,3 +12,10 @@ python model_processor/convert_transformers_model.py --input_model_name=../user_
                         --output_model_name=../user_data/pretrained/nezha-large \
                         --model_type=nezha
 
+python model_processor/convert_transformers_model.py --input_model_name=hfl/chinese-macbert-base \
+                        --output_model_name=../user_data/pretrained/macbert-base \
+                        --model_type=bert
+
+python model_processor/convert_transformers_model.py --input_model_name=hfl/chinese-macbert-large \
+                        --output_model_name=../user_data/pretrained/macbert-large \
+                        --model_type=bert

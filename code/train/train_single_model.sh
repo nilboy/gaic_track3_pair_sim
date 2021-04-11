@@ -18,6 +18,14 @@ case $model_name in
     learning_rate=1.5e-4
     min_learning_rate=4e-5
     ;;
+  "macbert-base")
+    model_type="bert"
+    batch_size=256
+    gradient_accumulation_steps=2
+    num_epochs=80
+    learning_rate=1.5e-4
+    min_learning_rate=4e-5
+    ;;
   "bert-large")
     model_type="bert"
     batch_size=96
@@ -28,6 +36,14 @@ case $model_name in
     ;;
   "nezha-large")
     model_type="nezha"
+    batch_size=96
+    gradient_accumulation_steps=6
+    num_epochs=80
+    learning_rate=1.2e-4
+    min_learning_rate=4e-5
+    ;;
+  "macbert-large")
+    model_type="bert"
     batch_size=96
     gradient_accumulation_steps=6
     num_epochs=80

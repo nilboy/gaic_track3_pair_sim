@@ -17,33 +17,32 @@ model_args:
   evaluate_during_training: True
   evaluate_during_training_silent: False
   evaluate_during_training_steps: 500
-  learning_rate: 2e-5
+  learning_rate: 4e-5
   max_seq_length: 32
   use_multiprocessing: True
   no_cache: False
   no_save: True
-  num_train_epochs: 15
+  num_train_epochs: 8
   overwrite_output_dir: True
   reprocess_input_data: True
   train_batch_size: 64
   gradient_accumulation_steps: 1
   train_custom_parameters_only: False
   scheduler: "cosine_schedule_with_warmup"
-  regression: True
-  use_bimodel: False
-  temperature: 1.0
+  regression: False
+  labels_list: [0, 1]
   use_early_stopping: True
   early_stopping_delta: 0.0
   early_stopping_metric: "auroc"
   early_stopping_metric_minimize: False
   early_stopping_consider_epochs: True
-  early_stopping_patience: 10
+  early_stopping_patience: 6
   # swa
   use_swa: True
-  swa_steps: 300
+  swa_steps: 100
   swa_lr: 2e-5
-  swa_start_step: 5000
-  submodel_type: ensemble
+  swa_start_step: 1000
+  submodel_type: bert
 
 # 超参搜索参数
 sweep_config:
@@ -58,6 +57,21 @@ sweep_config:
     weight_decay:
       min: 0.0
       max: 1e-3
+    # params
+    params_embeddings:
+      min: 1e-6
+      max: 1e-4
+    params_pooler:
+      min: 1e-5
+      max: 1e-4
+    params_classifier:
+      min: 1e-5
+      max: 1e-4
+    # layer
+    layer_0-24:
+      min: 5e-6
+      max: 1e-4
+
     # additional
     additional_batch_size:
       values: [16, 32, 64, 128, 256]
@@ -66,4 +80,4 @@ sweep_config:
     additional_at_epsilon:
       values: [0.0]
     additional_pretrain_model_path:
-      values: ["../user_data/mlm/ensemble"]
+      values: ["../user_data/mlm/macbert-large/outputs"]

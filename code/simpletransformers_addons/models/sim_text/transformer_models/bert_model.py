@@ -89,6 +89,7 @@ def pooling_fn(outputs,
     sequence_outputs = outputs[0]
     mean_outputs = masked_mean_pooling(sequence_outputs, attention_mask, 1)
     return torch.cat([cls_outputs, mean_outputs], dim=-1)
+    #return cls_outputs
 
 class BertForSimText(BertPreTrainedModel):
     r"""

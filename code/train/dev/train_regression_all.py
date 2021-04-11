@@ -12,19 +12,19 @@ def manual_auc(labels, preds):
     auroc = auc(fpr, tpr)
     return auroc
 
-train_df = pd.read_json('../user_data/data/train_data/train_regression.jsonl', lines=True)
+train_df = pd.read_json('../user_data/data/train_data/kfold/0/train_regression.jsonl', lines=True)
 
 # Optional model configuration
 model_args = SimTextArgs()
-model_args.num_train_epochs=15
-model_args.train_batch_size = 32
-model_args.eval_batch_size = 32
+model_args.num_train_epochs=5
+model_args.train_batch_size = 64
+model_args.eval_batch_size = 64
 model_args.evaluate_during_training = False
 model_args.no_cache = False
 model_args.max_seq_length = 32
 model_args.learning_rate = 2e-5
 model_args.use_early_stopping = False
-model_args.gradient_accumulation_steps = 2
+model_args.gradient_accumulation_steps = 1
 # save
 model_args.save_steps = 0
 model_args.save_eval_checkpoints = False
