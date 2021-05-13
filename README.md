@@ -1,4 +1,4 @@
-# gai_track3_pair_sim
+# gaic_track3_pair_sim
 
 ## 预训练模型准备
 * 下载预训练模型
@@ -68,6 +68,7 @@
 * torch==1.7.0
 * transformers=4.3.0.rc1
 * simpletransformers==0.51.15
+* TensorRT-7.2.1.6
 
 ## 端到端训练脚本
 ```
@@ -77,21 +78,24 @@ bash ./run.sh
 ## 不同版本方案
 
 * 方案一: 预训练(多个模型) + finetune-分类(多个模型) + 生成软标签 + 训练regression模型(软标签，单模型)
-```
-cd code
-bash ./train.sh
-```
-初赛使用的该方案，初赛成绩为0.9220；
+    ```
+    cd code
+    bash ./train.sh
+    ```
+    初赛使用的该方案，初赛成绩为0.9220；
 
 * 方案二: 预训练(多个模型) + 加载预训练参数，初始化一个大模型 + 训练分类模型(单模型)
-```
-pipeline/pipeline_b.py
-```
-训练一个144层模型(6 * 12 + 24 * 3);
-该模型单模型在复赛A榜为0.9561；
+    ```
+    pipeline/pipeline_b.py
+    ```
+    训练一个144层模型(6 * 12 + 24 * 3);
+  
+    该模型单模型在复赛A榜成绩0.9561；推理平均时间15ms；
 
 * 方案三: 预训练(多个模型) + finetune-分类(多个模型) + 平均融合
-```
-pipeline/pipeline_d.py
-```
-该模型在复赛A榜没测试，B榜为0.9593；推理平均时间15ms；
+    ```
+    pipeline/pipeline_d.py
+    ```
+    融合6个bert-base + 3个bert-large模型；
+    
+    该模型在复赛A榜没测试，B榜成绩0.9593；推理平均时间15ms；
