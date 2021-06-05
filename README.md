@@ -1,4 +1,10 @@
 # gaic_track3_pair_sim
+[全球人工智能技术创新大赛-赛道三-冠军方案](https://mp.weixin.qq.com/s/_07bYrlA5YeQGqNVGqrvgQ)
+## 比赛主页
+https://tianchi.aliyun.com/competition/entrance/531851/introduction
+
+## 数据
+本项目没有提供数据，如果需要数据，请到天池比赛主页下载
 
 ## 预训练模型准备
 * 下载预训练模型
