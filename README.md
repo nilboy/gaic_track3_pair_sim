@@ -1,5 +1,5 @@
 # gaic_track3_pair_sim
-[全球人工智能技术创新大赛-赛道三-冠军方案](https://mp.weixin.qq.com/s/_07bYrlA5YeQGqNVGqrvgQ)
+[全球人工智能技术创新大赛-赛道三-冠军方案](https://yiwise-algo.yuque.com/docs/share/5a1e3b76-4d04-4127-979a-496d7bc8c1b8?#%20%E3%80%8A%E7%9F%AD%E6%96%87%E6%9C%AC%E7%9B%B8%E4%BC%BC%E5%8C%B9%E9%85%8D%E3%80%8B)
 ## 比赛主页
 https://tianchi.aliyun.com/competition/entrance/531851/introduction
 
